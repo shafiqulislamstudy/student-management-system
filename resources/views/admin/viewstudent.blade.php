@@ -1,0 +1,74 @@
+@extends('layout.app')
+@section('content')
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mt-3">
+            <div class="card-header">
+              <h3 class="card-title">View Students</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              @if ($message=Session::get('success'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{$message}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              @endif
+              <table id="example1" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Sl No</th>
+                  <th>Name</th>
+                  <th>Course</th>
+                  <th>Address</th>
+                  <th>Phone</th>
+                  <th>Image</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  @foreach ($collection as $item)
+                  <tr>
+                    <td>{{$i++}}</td>
+                    <td>{{$item->name}}</td>
+                    <td>{{$item->getCourse->courseName}}</td>
+                    <td>{{$item->address}}</td>
+                    <td>{{$item->contact}}</td>
+                    <td><img src="{{asset('assets/img/student')}}/{{$item->image}}" alt="student image" style="height: 50px;width:50px;"></td>
+                    <td>
+                      <a href="editstudent/{{$item->id}}" class="btn btn-warning btn-small">Edit</a>
+                      <a href="deletestudent/{{$item->id}}" class="btn btn-danger btn-small" onclick="return confirm('Do you want to delete permanently?')">Delete</a>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Sl No</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                  </tr>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+      </div>
+      <!-- /.card -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.Main content -->
+</div>
+@endsection
+
